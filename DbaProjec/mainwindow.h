@@ -36,6 +36,8 @@ private slots:
     void on_pushButton_8_clicked();
     void nacti_prodejny();
 
+    void on_pushButton_9_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSqlTableModel *modelVyrobci;

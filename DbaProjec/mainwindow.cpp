@@ -257,3 +257,29 @@ void MainWindow::nacti_prodejny()
         ui->tableWidget->setItem(rows-1, 5, tel);
    }
 }
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    {
+        QList <QTableWidgetItem *> selected = ui->tableWidget->selectedItems();
+        if(selected.count() == 0)
+        {
+            return;
+        }
+        QString sql = "DELETE FROM pily_to_prodejny WHERE id IN (";
+        for(int i=0; i<selected.count();++i)
+        {
+            sql+= ui->tableWidget->item(selected.at(i)->row(),0)->text();
+            if(i+1 != selected.count())
+            {
+                sql+=", ";
+            }
+        }
+        sql+=")";
+        QSqlQuery dotaz;
+        dotaz.prepare(sql);
+        dotaz.exec();
+        qDebug() << sql;
+        nacti_prodejny();
+    }
+}
